@@ -178,10 +178,11 @@ function native.git_commit(repo_root)
 	local git_redirection = read_file(git_dir)
 
 	-- submodule .git file contains a redirection in format "gitdir: PATH"
-	git_dir = repo_root .. '/' .. git_redirection:match('^gitdir: (.+)$')
+	git_dir = git_redirection:match('^gitdir: (.+)$')
 	if git_dir == nil then
 	  error('Something wrong with submodule .git file in' .. repo_root .. '/.git')
 	end
+	git_dir = repo_root .. '/' .. git_dir
 	git_dir = vim.trim(git_dir)
   end
   -- Read HEAD
