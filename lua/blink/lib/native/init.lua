@@ -198,7 +198,7 @@ function native.git_commit(repo_root)
   local ref = head_content:match('^ref: (.+)$')
   if ref then
     -- Try to read the loose ref file (e.g. .git/refs/heads/main)
-    local ref_path = git_dir .. ref
+    local ref_path = git_dir .. '/' .. ref
     local ref_content = read_file(ref_path)
     if ref_content then return vim.trim(ref_content) end
   end
