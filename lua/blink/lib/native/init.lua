@@ -182,8 +182,12 @@ function native.git_commit(repo_root)
 	if git_dir == nil then
 	  error('Something wrong with submodule .git file in' .. repo_root .. '/.git')
 	end
-	git_dir = repo_root .. '/' .. git_dir
+	
 	git_dir = vim.trim(git_dir)
+	
+	if vim.fn.isabsolutepath(git_dir) == 0 then
+	  git_dir = repo_root .. '/' .. git_dir
+	end
   end
   -- Read HEAD
   local head_path = git_dir .. '/HEAD'
